@@ -7,6 +7,7 @@
 //
 
 #import "DetailViewController.h"
+#import <Pokedex-Swift.h>
 
 @interface DetailViewController ()
 
