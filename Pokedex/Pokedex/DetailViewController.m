@@ -33,10 +33,19 @@ void *KVOContext = &KVOContext;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setUpLabels];
-    [APIController.sharedController addObserver:self forKeyPath:@"finished" options:0 context:KVOContext];
-    [APIController.sharedController fillInDetailsFor:self.pokefetty];
+
+    [APIController.sharedController fillInDetailsFor:self.pokewap];
 }
 
+- (void)setPokefetty:(PokemonBase *)pokefetty {
+    if(pokefetty != _pokefetty) {
+
+        _pokefetty = pokefetty;
+        _pokewap = [[Pokemon alloc] initWithName:self.pokefetty.name];
+
+        [APIController.sharedController addObserver:self forKeyPath:@"finished" options:0 context:KVOContext];
+    }
+}
 
 //- (void)setPokewap:(Pokemon *)pokewap {
 //    if(pokewap != _pokewap) {
@@ -48,7 +57,7 @@ void *KVOContext = &KVOContext;
 
 
 - (void)setUpLabels {
-    [self.nameLabel setText:[NSString stringWithFormat:@"Name: %@", self.pokefetty.name]];
+    [self.nameLabel setText:[NSString stringWithFormat:@"Name: %@", self.pokewap.name]];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context

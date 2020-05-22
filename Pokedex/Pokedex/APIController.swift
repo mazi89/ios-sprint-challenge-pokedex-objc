@@ -61,7 +61,65 @@ class APIController: NSObject {
         }.resume()
     }
 
-    @objc func fillInDetails(for pokemon: PokemonBase) {
+    @objc func fillInDetails(for pokemon: Pokemon) {
+
+        URLSession.shared.dataTask(with: pokemon.url) { (data, _, error) in
+            if let error = error {
+                NSLog("Error fetching da business : \(error)")
+                return
+            }
+
+            guard let data = data else {
+                NSLog("error  with corrupt data.")
+                return
+            }
+            do {
+                let json = try JSONSerialization.jsonObject(with: data, options: []) as! Dictionary<String, Any>
+                guard let id = json["id"] as? Int,
+                let abilities = json["abilities"] as? Array<String>,
+                let sprites = json["sprites"] as? Dictionary<String, String>,
+                    let urlString = sprites["front_default"] else {
+                        NSLog("Error decoding json: \(json)")
+                        return
+                }
+
+                pokemon.iD = Int32(id)
+                self.willChangeValue(forKey: "id")
+                self.didChangeValue(forKey: "id")
+
+                for ability in abilities {
+                    pokemon.abilities.append(ability)
+                }
+                self.willChangeValue(forKey: "abilities")
+                self.didChangeValue(forKey: "abilities")
+
+                guard let url = URL(string: urlString) else {
+                    NSLog("error making the url with urlString: \(urlString)")
+                    return
+                }
+
+                URLSession.shared.dataTask(with: url) { (data, _, error) in
+                    if let error = error {
+                        NSLog("Error fetching pookemon image : \(error)")
+                        return
+                    }
+
+                    guard let data = data else {
+                        NSLog("Bad data from pokemon sprite url")
+                        return
+                    }
+
+                    pokemon.imageData = data
+                }
+
+
+            } catch {
+                NSLog("Error unwrapping json : \(error)")
+                return
+            }
+
+        }.resume()
+
         willChangeValue(forKey: "finished")
         didChangeValue(forKey: "finished")
     }
