@@ -33,7 +33,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="zoV-vo-fLS" kind="show" id="sxn-ce-oDF"/>
+                                    <segue destination="zoV-vo-fLS" kind="show" identifier="PokeDetail" id="sxn-ce-oDF"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

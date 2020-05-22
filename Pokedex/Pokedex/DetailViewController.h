@@ -10,7 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class PokemonBase;
 @interface DetailViewController : UIViewController
+
+@property (nonatomic) PokemonBase *pokefetty;
 
 @end
 

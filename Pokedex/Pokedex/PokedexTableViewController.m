@@ -7,6 +7,7 @@
 //
 
 #import "PokedexTableViewController.h"
+#import "DetailViewController.h"
 #import "Pokedex-Swift.h"
 #import "Pokemon.h"
 #import "PokemonBase.h"
@@ -32,12 +33,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
     [self.pokedex fetchAllPokemonWithCompletion:^(NSArray<PokemonBase *> * _Nullable pokemen, NSError * _Nullable error) {
         if (error) {
@@ -79,6 +74,11 @@
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"PokeDetail"]) {
+        DetailViewController *detailVC = segue.destinationViewController;
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        detailVC.pokefetty = self.pokemonsters[indexPath.row];
+    }
 }
 
 @end

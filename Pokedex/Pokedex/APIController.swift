@@ -61,8 +61,9 @@ class APIController: NSObject {
         }.resume()
     }
 
-    @objc func fillInDetails(for pokemon: Pokemon) {
-        
+    @objc func fillInDetails(for pokemon: PokemonBase) {
+        willChangeValue(forKey: "finished")
+        didChangeValue(forKey: "finished")
     }
 
 }
