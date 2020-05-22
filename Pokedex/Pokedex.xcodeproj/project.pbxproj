@@ -13,6 +13,7 @@
 		9C923A0E24782C5A00C08806 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C923A0D24782C5A00C08806 /* Assets.xcassets */; };
 		9C923A1124782C5A00C08806 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C923A0F24782C5A00C08806 /* LaunchScreen.storyboard */; };
 		9C923A1424782C5A00C08806 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C923A1324782C5A00C08806 /* main.m */; };
+		9C923A2524782EA700C08806 /* Pokemon.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C923A2424782EA700C08806 /* Pokemon.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		9C923A1024782C5A00C08806 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9C923A1224782C5A00C08806 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9C923A1324782C5A00C08806 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9C923A2324782EA700C08806 /* Pokemon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pokemon.h; sourceTree = "<group>"; };
+		9C923A2424782EA700C08806 /* Pokemon.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Pokemon.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +77,8 @@
 		9C923A1A24782C8A00C08806 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				9C923A2324782EA700C08806 /* Pokemon.h */,
+				9C923A2424782EA700C08806 /* Pokemon.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -190,6 +195,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C923A0324782C5800C08806 /* AppDelegate.m in Sources */,
+				9C923A2524782EA700C08806 /* Pokemon.m in Sources */,
 				9C923A1424782C5A00C08806 /* main.m in Sources */,
 				9C923A0624782C5800C08806 /* SceneDelegate.m in Sources */,
 			);
