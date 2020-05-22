@@ -51,14 +51,17 @@ void *KVOContext = &KVOContext;
     }
 }
 
-//- (void)setPokewap:(Pokemon *)pokewap {
-//    if(pokewap != _pokewap) {
-//        [_pokewap removeObserver:self forKeyPath:@"finished" context:KVOContext];
-//        _pokewap = pokewap;
-//        [_pokewap addObserver:self forKeyPath:@"finished" options:0 context:KVOContext];
-//    }
-//}
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
 
+    [APIController.sharedController removeObserver:self forKeyPath:@"finished" context:KVOContext];
+    [APIController.sharedController removeObserver:self forKeyPath:@"id" context:KVOContext];
+    [APIController.sharedController removeObserver:self forKeyPath:@"abilities" context:KVOContext];
+    [APIController.sharedController removeObserver:self forKeyPath:@"image" context:KVOContext];
+
+    _pokewap = nil;
+    _pokefetty = nil;
+}
 
 - (void)setUpLabels {
     [self.nameLabel setText:[NSString stringWithFormat:@"Name: %@", self.pokewap.name]];
@@ -70,12 +73,11 @@ void *KVOContext = &KVOContext;
     if (context == KVOContext) {
         if ([keyPath isEqualToString:@"finished"]) {
             NSLog(@"Hit observer");
-            [APIController.sharedController removeObserver:self forKeyPath:@"finished" context:KVOContext];
 
         } else if ([keyPath isEqualToString:@"id"]) {
 
             [self.idLabel setText:[NSString stringWithFormat:@"%d", self.pokewap.iD]];
-            [APIController.sharedController removeObserver:self forKeyPath:@"id"  context:KVOContext];
+
         } else if ([keyPath isEqualToString:@"abilities"]) {
 
             switch (self.pokewap.abilities.count) {
@@ -100,11 +102,9 @@ void *KVOContext = &KVOContext;
                 default:
                     break;
             }
-            [APIController.sharedController removeObserver:self forKeyPath:@"abilities" context:KVOContext];
         } else if ([keyPath isEqualToString:@"image"]) {
 
             [self.spriteImage setImage:[UIImage imageWithData:self.pokewap.imageData]];
-            [APIController.sharedController removeObserver:self forKeyPath:@"image"  context:KVOContext];
 
         }
     } else {
