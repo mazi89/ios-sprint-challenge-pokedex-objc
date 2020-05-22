@@ -89,8 +89,8 @@ class APIController: NSObject {
 
                 for items in abilities {
                     if let object = items["ability"] as? Dictionary<String, Any>,
-                        let ability = object["ability"] as? String {
-                        pokemon.abilities.append(ability)
+                        let ability = object["name"] as? String {
+                        pokemon.abilities.add(NSString(string: ability))
                     }
                 }
                 self.willChangeValue(forKey: "abilities")
@@ -125,8 +125,7 @@ class APIController: NSObject {
 
         }.resume()
 
-        willChangeValue(forKey: "finished")
-        didChangeValue(forKey: "finished")
+
     }
 
 }

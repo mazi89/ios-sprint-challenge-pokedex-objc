@@ -70,39 +70,41 @@ void *KVOContext = &KVOContext;
     if (context == KVOContext) {
         if ([keyPath isEqualToString:@"finished"]) {
             NSLog(@"Hit observer");
+            [APIController.sharedController removeObserver:self forKeyPath:@"finished" context:KVOContext];
+
         } else if ([keyPath isEqualToString:@"id"]) {
 
             [self.idLabel setText:[NSString stringWithFormat:@"%d", self.pokewap.iD]];
-
+            [APIController.sharedController removeObserver:self forKeyPath:@"id"  context:KVOContext];
         } else if ([keyPath isEqualToString:@"abilities"]) {
 
             switch (self.pokewap.abilities.count) {
                 case 1:
-                    [self.ability1Label setHidden:NO];
+                    [self.ability1Label setHidden:false];
                     [self.ability1Label setText:self.pokewap.abilities[0]];
                     break;
                 case 2:
-                    [self.ability1Label setHidden:NO];
+                    [self.ability1Label setHidden:false];
                     [self.ability1Label setText:self.pokewap.abilities[0]];
-                    [self.ability2Label setHidden:NO];
+                    [self.ability2Label setHidden:false];
                     [self.ability2Label setText:self.pokewap.abilities[1]];
                     break;
                 case 3:
-                    [self.ability1Label setHidden:NO];
+                    [self.ability1Label setHidden:false];
                     [self.ability1Label setText:self.pokewap.abilities[0]];
-                    [self.ability2Label setHidden:NO];
+                    [self.ability2Label setHidden:false];
                     [self.ability2Label setText:self.pokewap.abilities[1]];
-                    [self.ability3Label setHidden:NO];
+                    [self.ability3Label setHidden:false];
                     [self.ability3Label setText:self.pokewap.abilities[2]];
                     break;
                 default:
                     break;
             }
-            [self.idLabel setText:[NSString stringWithFormat:@"%d", self.pokewap.iD]];
-
+            [APIController.sharedController removeObserver:self forKeyPath:@"abilities" context:KVOContext];
         } else if ([keyPath isEqualToString:@"image"]) {
 
             [self.spriteImage setImage:[UIImage imageWithData:self.pokewap.imageData]];
+            [APIController.sharedController removeObserver:self forKeyPath:@"image"  context:KVOContext];
 
         }
     } else {
