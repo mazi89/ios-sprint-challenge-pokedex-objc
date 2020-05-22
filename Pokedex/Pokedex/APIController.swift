@@ -76,9 +76,9 @@ class APIController: NSObject {
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: []) as! Dictionary<String, Any>
                 guard let id = json["id"] as? Int,
-                let abilities = json["abilities"] as? Array<String>,
-                let sprites = json["sprites"] as? Dictionary<String, String>,
-                    let urlString = sprites["front_default"] else {
+                let abilities = json["abilities"] as? Array<Dictionary<String, Any>>,
+                let sprites = json["sprites"] as? Dictionary<String, Any>,
+                    let urlString = sprites["front_default"] as? String else {
                         NSLog("Error decoding json: \(json)")
                         return
                 }
@@ -87,8 +87,11 @@ class APIController: NSObject {
                 self.willChangeValue(forKey: "id")
                 self.didChangeValue(forKey: "id")
 
-                for ability in abilities {
-                    pokemon.abilities.append(ability)
+                for items in abilities {
+                    if let object = items["ability"] as? Dictionary<String, Any>,
+                        let ability = object["ability"] as? String {
+                        pokemon.abilities.append(ability)
+                    }
                 }
                 self.willChangeValue(forKey: "abilities")
                 self.didChangeValue(forKey: "abilities")
@@ -110,7 +113,9 @@ class APIController: NSObject {
                     }
 
                     pokemon.imageData = data
-                }
+                    self.willChangeValue(forKey: "image")
+                    self.didChangeValue(forKey: "image")
+                }.resume()
 
 
             } catch {
