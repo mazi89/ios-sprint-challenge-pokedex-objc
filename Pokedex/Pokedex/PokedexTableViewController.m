@@ -8,6 +8,7 @@
 
 #import "PokedexTableViewController.h"
 #import "Pokedex-Swift.h"
+#import "Pokemon.h"
 
 @interface PokedexTableViewController ()
 @property (nonatomic, readonly) APIController *pokedex;
